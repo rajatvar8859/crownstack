@@ -1,0 +1,33 @@
+<div class="container-fluid set-width">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 mgb-22">
+            <span class="mglr-10">
+                <app-breadcrumb [propertiesList]="breadcumData"></app-breadcrumb>
+            </span>
+            <div class="float-right">
+                <button [matMenuTriggerFor]="matMenu" class="currency-btn btn-height mgl-30">
+                    <span class="currencyText">Select Location</span>
+                </button>&nbsp;
+                <mat-menu #matMenu="matMenu" yPosition="below" xPosition="after">
+                    <ng-container *ngFor="let data of location">
+                        <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{data.name}}</button>
+                        <mat-menu #sub_menu="matMenu">
+                            <ng-container *ngFor="let subData of data?.branches">
+                                <button (click)="clickOnItem(data?.name,subData?.name)"
+                                    mat-menu-item>{{ subData?.name }}</button>
+                            </ng-container>
+                        </mat-menu>
+                    </ng-container>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="noDataFound">
+        <div class="no-data">
+            <div class="no-data-text">
+                <span class="textClass">Welcome to Rental Management System</span>
+                <span class="textClass">Please Select the Location</span>
+            </div>
+        </div>
+    </ng-container>
+</div>

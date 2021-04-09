@@ -1,0 +1,47 @@
+<div class="container-fluid set-width">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 mgb-22">
+            <span class="mglr-10">
+                <app-breadcrumb [propertiesList]="breadcumData"></app-breadcrumb>
+            </span>
+            <div class="float-right">
+                <button [matMenuTriggerFor]="matMenu" class="currency-btn btn-height mgl-30">
+                    <span class="currencyText">Select Location</span>
+                </button>&nbsp;
+                <mat-menu #matMenu="matMenu" yPosition="below" xPosition="after">
+                    <ng-container *ngFor="let data of allData">
+                        <button mat-menu-item [matMenuTriggerFor]="sub_menu">{{data.name}}</button>
+                        <mat-menu #sub_menu="matMenu">
+                            <ng-container *ngFor="let subData of data?.branches">
+                                <button (click)="clickOnItem(data?.name,subData?.name)"
+                                    mat-menu-item>{{ subData?.name }}</button>
+                            </ng-container>
+                        </mat-menu>
+                    </ng-container>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+    <div class="py-2">
+        <div>
+            <div class="row">
+                <div *ngFor="let data of category" class="col-md-3">
+                    <div style="margin:20px;" class="card">
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <img class="imageClass" [src]="'../../../../assets/images/'+ data?.image">
+                                </div>
+                            </div>
+                            <div class="cardBackground">
+                                <div class="col text-center">
+                                    <a (click)="ad(data?.name)" class="cardText">{{data?.name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
